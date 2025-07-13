@@ -78,7 +78,7 @@ export default function SignUpForm({
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
 						placeholder="Enter your email"
 					/>
 				</div>
@@ -96,7 +96,7 @@ export default function SignUpForm({
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						required
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
 						placeholder="Enter your password"
 					/>
 				</div>
@@ -114,21 +114,21 @@ export default function SignUpForm({
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
 						placeholder="Confirm your password"
 					/>
 				</div>
 
 				{/* Show error message if sign-up fails */}
 				{error && (
-					<div className="bg-red-50 border border-red-200 text-red-600 text-sm p-3 rounded-xl">
+					<div className="bg-red-50 border border-red-200 text-red-600 text-sm p-3 rounded-lg">
 						{error}
 					</div>
 				)}
 
 				{/* Show success message if sign-up succeeds */}
 				{message && (
-					<div className="bg-green-50 border border-green-200 text-green-600 text-sm p-3 rounded-xl">
+					<div className="bg-green-50 border border-green-200 text-green-600 text-sm p-3 rounded-lg">
 						{message}
 					</div>
 				)}
@@ -137,7 +137,7 @@ export default function SignUpForm({
 				<button
 					type="submit"
 					disabled={loading}
-					className="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:transform-none"
+					className="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow hover:shadow-md transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:transform-none"
 				>
 					{loading ? "Creating account..." : "Sign Up"}
 				</button>

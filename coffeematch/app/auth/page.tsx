@@ -67,7 +67,7 @@ export default function AuthPage() {
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
 			<div className="max-w-md w-full">
-				<div className="bg-white rounded-3xl shadow-2xl p-10 border border-blue-100">
+				<div className="bg-white rounded-lg shadow p-10 border border-blue-100">
 					<div className="text-center mb-10">
 						<h2 className="text-4xl font-bold text-gray-900 mb-3">
 							{getTitle()}

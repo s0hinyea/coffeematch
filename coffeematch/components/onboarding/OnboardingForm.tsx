@@ -18,6 +18,9 @@ interface OnboardingData {
 	linkedin: string;
 	github: string;
 	portfolio: string;
+	job_title: string;
+	company: string;
+	grad_year: string;
 }
 
 const techStackOptions = [
@@ -71,6 +74,9 @@ export default function OnboardingForm() {
 		linkedin: "",
 		github: "",
 		portfolio: "",
+		job_title: "",
+		company: "",
+		grad_year: "",
 	});
 
 	const handleInputChange = (
@@ -126,18 +132,23 @@ export default function OnboardingForm() {
 			// Prepare the data for insertion
 			const userData = {
 				id: user.id, // This maps to auth.users.id
-				email: user.email,
+				email: user.email, // Automatically use email from auth
 				full_name: formData.full_name.trim(),
 				bio: formData.bio.trim() || null,
 				goals: formData.goals.trim() || null,
 				tech_stack:
 					formData.tech_stack.length > 0 ? formData.tech_stack : null,
-				role: formData.role, // Now just a string, no type constraint
+				role: formData.role,
 				school: formData.school.trim() || null,
 				major: formData.major.trim() || null,
 				linkedin: formData.linkedin.trim() || null,
 				github: formData.github.trim() || null,
 				portfolio: formData.portfolio.trim() || null,
+				job_title: formData.job_title.trim() || null,
+				company: formData.company.trim() || null,
+				grad_year: formData.grad_year
+					? parseInt(formData.grad_year)
+					: null,
 			};
 
 			console.log("Attempting to insert user data:", userData);
@@ -166,7 +177,7 @@ export default function OnboardingForm() {
 	};
 
 	return (
-		<div className="bg-white shadow-2xl rounded-3xl p-10 border border-blue-100">
+		<div className="bg-white shadow rounded-lg p-10 border border-blue-100">
 			<form onSubmit={handleSubmit} className="space-y-8">
 				{/* Full Name */}
 				<div>
@@ -183,7 +194,7 @@ export default function OnboardingForm() {
 						required
 						value={formData.full_name}
 						onChange={handleInputChange}
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
 						placeholder="Enter your full name"
 					/>
 				</div>
@@ -202,7 +213,7 @@ export default function OnboardingForm() {
 						required
 						value={formData.role}
 						onChange={handleInputChange}
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
 					>
 						<option value="Mentee">Mentee</option>
 						<option value="Mentor">Mentor</option>
@@ -223,7 +234,7 @@ export default function OnboardingForm() {
 						rows={4}
 						value={formData.bio}
 						onChange={handleInputChange}
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
 						placeholder="Tell us about yourself..."
 					/>
 				</div>
@@ -242,7 +253,7 @@ export default function OnboardingForm() {
 						rows={3}
 						value={formData.goals}
 						onChange={handleInputChange}
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
 						placeholder="What are your career goals?"
 					/>
 				</div>
@@ -286,7 +297,7 @@ export default function OnboardingForm() {
 						name="school"
 						value={formData.school}
 						onChange={handleInputChange}
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
 						placeholder="University or school name"
 					/>
 				</div>
@@ -305,8 +316,67 @@ export default function OnboardingForm() {
 						name="major"
 						value={formData.major}
 						onChange={handleInputChange}
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
 						placeholder="Your field of study"
+					/>
+				</div>
+
+				{/* Graduation Year */}
+				<div>
+					<label
+						htmlFor="grad_year"
+						className="block text-sm font-semibold text-gray-700 mb-3"
+					>
+						Graduation Year
+					</label>
+					<input
+						type="number"
+						id="grad_year"
+						name="grad_year"
+						value={formData.grad_year}
+						onChange={handleInputChange}
+						min="2000"
+						max="2030"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						placeholder="e.g., 2024"
+					/>
+				</div>
+
+				{/* Job Title */}
+				<div>
+					<label
+						htmlFor="job_title"
+						className="block text-sm font-semibold text-gray-700 mb-3"
+					>
+						Current Job Title
+					</label>
+					<input
+						type="text"
+						id="job_title"
+						name="job_title"
+						value={formData.job_title}
+						onChange={handleInputChange}
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						placeholder="e.g., Software Engineer, Student"
+					/>
+				</div>
+
+				{/* Company */}
+				<div>
+					<label
+						htmlFor="company"
+						className="block text-sm font-semibold text-gray-700 mb-3"
+					>
+						Company/Organization
+					</label>
+					<input
+						type="text"
+						id="company"
+						name="company"
+						value={formData.company}
+						onChange={handleInputChange}
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						placeholder="e.g., Microsoft, University of XYZ"
 					/>
 				</div>
 
@@ -324,7 +394,7 @@ export default function OnboardingForm() {
 						name="linkedin"
 						value={formData.linkedin}
 						onChange={handleInputChange}
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
 						placeholder="https://linkedin.com/in/yourprofile"
 					/>
 				</div>
@@ -343,7 +413,7 @@ export default function OnboardingForm() {
 						name="github"
 						value={formData.github}
 						onChange={handleInputChange}
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
 						placeholder="https://github.com/yourusername"
 					/>
 				</div>
@@ -362,14 +432,14 @@ export default function OnboardingForm() {
 						name="portfolio"
 						value={formData.portfolio}
 						onChange={handleInputChange}
-						className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
 						placeholder="https://yourportfolio.com"
 					/>
 				</div>
 
 				{/* Error Message */}
 				{error && (
-					<div className="bg-red-50 border border-red-200 rounded-xl p-4">
+					<div className="bg-red-50 border border-red-200 rounded-lg p-4">
 						<span className="text-red-700 text-sm font-medium">
 							{error}
 						</span>
@@ -381,7 +451,7 @@ export default function OnboardingForm() {
 					<button
 						type="submit"
 						disabled={loading}
-						className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 text-lg disabled:transform-none"
+						className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-4 px-6 rounded-lg shadow hover:shadow-md transform hover:scale-105 transition-all duration-200 text-lg disabled:transform-none"
 					>
 						{loading ? (
 							<div className="flex items-center justify-center">

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import UserProfile from "@/components/auth/UserProfile";
+import UserProfile from "@/components/dashboard/UserProfile";
 import { useOnboardingStatus } from "@/hooks/useOnboardingStatus";
 
 export default function DashboardPage() {
@@ -37,7 +37,7 @@ export default function DashboardPage() {
 			<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
 				<div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
 					<div className="mb-8">
-						<div className="bg-white rounded-3xl shadow-2xl p-8 border border-blue-100">
+						<div className="bg-white rounded-lg shadow p-8">
 							<h1 className="text-4xl font-bold text-gray-900 mb-3">
 								Dashboard
 							</h1>
@@ -51,7 +51,7 @@ export default function DashboardPage() {
 					<div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
 						<UserProfile />
 
-						<div className="bg-white rounded-3xl shadow-2xl p-8 border border-blue-100">
+						<div className="bg-white rounded-lg shadow p-8 ">
 							<div className="flex items-center mb-6">
 								<h2 className="text-2xl font-bold text-gray-900">
 									Welcome to Coffee Match!
@@ -64,7 +64,7 @@ export default function DashboardPage() {
 								exploring to find your perfect coffee companion!
 							</p>
 							<div className="pt-4 border-t border-gray-100">
-								<button className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg">
+								<button className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg">
 									Find Matches
 								</button>
 							</div>
