@@ -153,7 +153,7 @@ export default function OnboardingForm() {
 
 			console.log("Attempting to insert user data:", userData);
 
-			const res = await fetch('/api/onboarding', {
+			const res = await fetch('/api/upsert', {
 				method: 'POST',
 				headers: {
 					'Content-Type' : 'applicaton/json'
