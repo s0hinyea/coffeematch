@@ -153,6 +153,15 @@ export default function OnboardingForm() {
 
 			console.log("Attempting to insert user data:", userData);
 
+			const res = await fetch('/api/onboarding', {
+				method: 'POST',
+				headers: {
+					'Content-Type' : 'applicaton/json'
+				},
+				body: JSON.stringify(userData)
+			})
+
+			console.log("Upserted"); 
 			// Insert the user data into the users table
 			const { data, error } = await supabase
 				.from("users")
