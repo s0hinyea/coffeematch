@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import UserProfile from "@/components/dashboard/UserProfile";
 import { useOnboardingStatus } from "@/hooks/useOnboardingStatus";
+import { supabase } from "@/lib/supabase";
 
 export default function DashboardPage() {
 	const router = useRouter();
@@ -15,6 +16,30 @@ export default function DashboardPage() {
 			router.push("/onboarding");
 		}
 	}, [hasCompletedOnboarding, loading, router]);
+
+	const showMatch = async() => {
+		try{
+			const {data : {user} } = await supabase.auth.getUser();
+			const userId = user!.id
+
+			console.log(userId);
+			const res = await fetch(`/api/match?id=${userId}`, {
+				method: 'GET'
+			});
+			
+			const match = await res.json()
+
+			if (match){
+				console.log("I got a match!", JSON.stringify(match))
+		}
+		} catch (error){
+			console.log("Error matching: ", error)
+		}
+		
+
+	}
+
+
 
 	if (loading) {
 		return (
@@ -64,7 +89,7 @@ export default function DashboardPage() {
 								exploring to find your perfect coffee companion!
 							</p>
 							<div className="pt-4 border-t border-gray-100">
-								<button className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg">
+								<button onClick={showMatch} className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg">
 									Find Matches
 								</button>
 							</div>
