@@ -8,9 +8,9 @@ export async function semanticSearch(userId: string){
     const profile = await getUserProfile(userId);  
     const { bio, goals, tech_stack } = profile
     console.log("🔍 Retrieved profile:", profile);
+    console.log("🔍 USER ID :", userId);
 
     const queryVector = await embedProfile({ bio, goals, tech_stack });
-    console.log("🔍 Profile data:", { bio, goals, tech_stack });
 
     const index = pc.Index(process.env.PINECONE_INDEX_NAME!);
 
@@ -19,12 +19,12 @@ export async function semanticSearch(userId: string){
       vector: queryVector,
       filter: {
         onboarding_status: 2,
-        id: { $ne: userId }
+        role: { $nin: ['Mentor', 'mentor'] }
     }
   });
   
   console.log('Query Results: ', JSON.stringify(res.matches, null, 2));
-  return res;
+  return res.matches;
   
   } catch (error){
     console.log("🚨 semanticSearch error:", error);

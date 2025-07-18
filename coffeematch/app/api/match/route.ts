@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { semanticSearch } from '@/lib/semantic';
 
-export async function GET(req: any){
+export async function GET(req: Request){
   try {
     const { searchParams } = new URL(req.url);
     const userId = searchParams.get('id');
@@ -14,7 +14,8 @@ export async function GET(req: any){
     }
     
     const res = await semanticSearch(userId);
-    // ... rest
+    //
+    return NextResponse.json(res[0]);
   } catch (error: any) {
     console.log("🚨 API Error details:", error);
     console.log("🚨 Error name:", error.name);

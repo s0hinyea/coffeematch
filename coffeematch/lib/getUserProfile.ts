@@ -9,7 +9,7 @@ export async function getUserProfile(userId: string){
     .eq('id', userId.trim())
     .single()
     
-    if (data){console.log(data);}
+
     if (error) throw new Error(error.message);
     return data;
   } catch (error) {
