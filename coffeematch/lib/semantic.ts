@@ -19,7 +19,8 @@ export async function semanticSearch(userId: string){
       vector: queryVector,
       filter: {
         onboarding_status: 2,
-        role: { $nin: ['Mentor', 'mentor'] }
+        role: { $nin: ['Mentor', 'mentor'] },
+        userId: { $ne: userId}
     }
   });
   
